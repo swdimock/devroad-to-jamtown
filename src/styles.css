@@ -1,0 +1,30 @@
+/* You can add global styles to this file, and also import other style files */
+@import "./assets/stylesheets/reset";
+
+html,
+body {
+  font-family: "VT323", sans-serif;
+  color: white;
+  font-size: 1.3em;
+}
+
+html {
+  background: black url("./assets/images/backdrops/home.png") center no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+}
+
+/* Common */
+img {
+  max-width: 100%;
+}
+
+/* Forms */
+fieldset {
+  border: none;
+}
+
+fieldset:not(:first-child) {
+  visibility: hidden;
+  opacity: 0;
+}

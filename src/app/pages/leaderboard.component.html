@@ -1,0 +1,18 @@
+<img id="logo" src="../assets/images/leaderboard.png" />
+<div class="leaders">
+  <ng-container *ngFor="let leader of leaderboard">
+    <div class="leader">
+      <div class="portrait">
+        <img src="./assets/images/characters/{{ leader.portrait }}" />
+      </div>
+      <div class="details">
+        <div class="name">{{ leader.name }}</div>
+        <div class="days">
+          Started {{ leader.date }}
+          <br />
+          Survived {{ leader.days }} days
+        </div>
+      </div>
+    </div>
+  </ng-container>
+</div>

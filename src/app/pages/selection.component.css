@@ -1,0 +1,11 @@
+#logo {
+  width: 600px;
+}
+
+div {
+  text-align: center;
+}
+
+.selected img {
+  box-shadow: 0 0 0 0 red;
+}
