@@ -1,69 +1,99 @@
 <div>
-  <img id="logo" src="../assets/images/logo.png" />
-  <form [formGroup]="characterFormGroup">
-    <!-- The Leader -->
-    <fieldset formGroupName="leader">
-      <h2>Who are you?</h2>
-      <section
-        fxLayout="row wrap"
-        fxLayoutAlign="space-around center"
-        fxLayoutGap="1em grid"
-      >
-        <div
-          [class.selected]="getCharacterSelectedState('leader', char.id)"
-          fxFlex="20%"
-          *ngFor="let char of characters"
-        >
-          <label>
-            <app-character [character]="char"></app-character>
-          </label>
-          <input formControlName="characterId" type="radio" [value]="char.id" />
-        </div>
-      </section>
-    </fieldset>
+    <img id="logo" src="../assets/images/logo.png"/>
+    <form [formGroup]="characterFormGroup">
+        <!-- The Leader -->
+        <fieldset
+                [class.selected]="isFormCharacterSet('leader')"
+                formGroupName="leader">
+            <ng-container
+                    *ngIf="!isFormCharacterSet('leader'); else leaderSelected">
+                <h2>Who are you?</h2>
+                <section fxLayout="row wrap"
+                         fxLayoutAlign="space-around center"
+                         fxLayoutGap="1em grid">
+                    <div *ngFor="let char of characters"
+                         (click)="setFormGroupValue('leader', char.id)"
+                         fxFlex="20%">
+                        <label>
+                            <app-character [character]="char"></app-character>
+                        </label>
+                        <input hidden
+                               formControlName="characterId"
+                               type="radio"
+                               [value]="char.id"/>
+                    </div>
+                </section>
+            </ng-container>
+            <ng-template #leaderSelected>
+                I am <a href="javascript:void(0)"
+                        (click)="setFormGroupValue('leader', null)">{{getCharacterFromFormId('leader').name}}</a>.
+            </ng-template>
+        </fieldset>
 
-    <!-- The Lieutenant -->
-    <fieldset formGroupName="lieutenant">
-      <h2>Who is your best friend?</h2>
-      <section
-        fxLayout="row wrap"
-        fxLayoutAlign="space-around center"
-        fxLayoutGap="1em grid"
-      >
-        <div
-          [class.selected]="getCharacterSelectedState('lieutenant', char.id)"
-          fxFlex="20%"
-          *ngFor="let char of characters"
-        >
-          <label>
-            <app-character [character]="char"></app-character>
-          </label>
-          <input formControlName="characterId" type="radio" [value]="char.id" />
-        </div>
-      </section>
-    </fieldset>
 
-    <!-- The Lacky -->
-    <fieldset formGroupName="lacky">
-      <h2>Who is the sacrificial lamb?</h2>
-      <section
-        fxLayout="row wrap"
-        fxLayoutAlign="space-around center"
-        fxLayoutGap="1em grid"
-      >
-        <div
-          [class.selected]="getCharacterSelectedState('lacky', char.id)"
-          fxFlex="20%"
-          *ngFor="let char of characters"
-        >
-          <label>
-            <app-character [character]="char"></app-character>
-          </label>
-          <input formControlName="characterId" type="radio" [value]="char.id" />
-        </div>
-      </section>
-    </fieldset>
-  </form>
+        <!-- The Lieutenant -->
+        <fieldset
+                [class.selected]="isFormCharacterSet('lieutenant')"
+                formGroupName="lieutenant">
+            <ng-container
+                    *ngIf="!isFormCharacterSet('lieutenant'); else lieutenantSelected">
+                <h2>Who is your best friend?</h2>
+                <section fxLayout="row wrap"
+                         fxLayoutAlign="space-around center"
+                         fxLayoutGap="1em grid">
+                    <div *ngFor="let char of characters"
+                         (click)="setFormGroupValue('lieutenant', char.id)"
+                         fxFlex="20%">
+                        <label>
+                            <app-character [character]="char"></app-character>
+                        </label>
+                        <input hidden
+                               formControlName="characterId"
+                               type="radio"
+                               [value]="char.id"/>
+                    </div>
+                </section>
+            </ng-container>
+            <ng-template #lieutenantSelected>
+                My best buddy is <a href="javascript:void(0)"
+                                    (click)="setFormGroupValue('lieutenant', null)">{{getCharacterFromFormId('lieutenant').name}}</a>.
+            </ng-template>
+        </fieldset>
 
-  {{ characterFormGroup.value | json }}
+
+        <!-- The Lacky -->
+        <fieldset [class.selected]="isFormCharacterSet('lacky')"
+                  formGroupName="lacky">
+            <ng-container
+                    *ngIf="!isFormCharacterSet('lacky'); else lackySelected">
+                <h2>Who is the sacrificial lamb?</h2>
+                <section fxLayout="row wrap"
+                         fxLayoutAlign="space-around center"
+                         fxLayoutGap="1em grid">
+                    <div *ngFor="let char of characters"
+                         (click)="setFormGroupValue('lacky', char.id)"
+                         fxFlex="20%">
+                        <label>
+                            <app-character [character]="char"></app-character>
+                        </label>
+                        <input hidden
+                               formControlName="characterId"
+                               type="radio"
+                               [value]="char.id"/>
+                    </div>
+                </section>
+            </ng-container>
+            <ng-template #lackySelected>
+                <a href="javascript:void(0)"
+                   (click)="setFormGroupValue('lacky', null)">{{getCharacterFromFormId('lacky').name}}</a>
+                is just tagging along.
+            </ng-template>
+        </fieldset>
+
+    </form>
+
+    <!-- Quest Begin -->
+    <h2 [hidden]="!characterFormGroup.valid" class="display-1">
+        <a href="javascript:void(0)">START QUEST</a>
+    </h2>
 </div>

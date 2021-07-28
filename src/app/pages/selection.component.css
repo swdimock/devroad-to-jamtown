@@ -6,6 +6,36 @@ div {
   text-align: center;
 }
 
-.selected img {
-  box-shadow: 0 0 0 0 red;
+h2 {
+  margin-bottom: 1em;
+}
+
+form, fieldset {
+  margin: 1em 0 0;
+}
+
+fieldset:not(:first-child) {
+  visibility: hidden;
+  opacity: 0;
+}
+
+fieldset.selected + fieldset {
+  visibility: visible;
+  opacity: 1;
+}
+
+::ng-deep section img {
+  cursor: pointer;
+  box-shadow: none;
+  border: 8px solid #edad10;
+}
+
+::ng-deep section .selected img, ::ng-deep section img:hover {
+  box-shadow: 0 0 30px -5px #fb1908;
+  transition: box-shadow ease 250ms;
+}
+
+h2.display-1 {
+  margin-top: 1em;
+  transform: rotate(4deg);
 }

@@ -1,5 +1,5 @@
 import { Component } from "@angular/core";
-import { FormBuilder } from "@angular/forms";
+import { FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: "selection-quest",
@@ -30,26 +30,36 @@ export class SelectionComponent {
 
   public characterFormGroup = this.form.group({
     leader: this.form.group({
-      characterId: this.form.control(""),
+      characterId: this.form.control("", Validators.required),
       tool: this.form.control("")
     }),
     lieutenant: this.form.group({
-      characterId: this.form.control(""),
+      characterId: this.form.control("", Validators.required),
       tool: this.form.control("")
     }),
     lacky: this.form.group({
-      characterId: this.form.control(""),
+      characterId: this.form.control("", Validators.required),
       tool: this.form.control("")
     })
   });
 
-  // get getLeaderId() {
-  // return this.characterFormGroup.get("member1").get("characterId");
-  // }
+  getFormGroupValue(event) {
+    return this.characterFormGroup.get(event);
+  }
+
+  isFormCharacterSet(event) {
+    return !!this.characterFormGroup.get(event).get("characterId").value;
+  }
+
+  getCharacterFromFormId(event) {
+    return this.characters.find((character) => {
+      // @ts-ignore
+      return character.id === this.getFormGroupValue(event).value?.characterId;
+    })
+  }
 
   setFormGroupValue(event, value) {
-    console.log(event);
-    console.log(value);
+    this.characterFormGroup.get(event).get("characterId").patchValue(value);
   }
 
   getCharacterSelectedState(groupName: string, value: string): boolean {

@@ -14,7 +14,16 @@ html {
   background-attachment: fixed;
 }
 
+/* Headings */
+.display-1 {
+  font-size: 3rem
+}
+
 /* Common */
+a {
+  color: #f2b71e;
+}
+
 img {
   max-width: 100%;
 }
@@ -22,9 +31,4 @@ img {
 /* Forms */
 fieldset {
   border: none;
-}
-
-fieldset:not(:first-child) {
-  visibility: hidden;
-  opacity: 0;
 }
